@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
+            $table->string('nama')->nullable();
+            $table->string('alamat')->nullable();
+            $table->date('tgl_lahir')->nullable();
             $table->timestamps();
         });
     }

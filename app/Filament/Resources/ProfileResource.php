@@ -17,13 +17,27 @@ class ProfileResource extends Resource
 {
     protected static ?string $model = Profile::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                //nama
+                Forms\Components\TextInput::make('nama')
+                    ->label('Nama')
+                    ->placeholder('Nama')
+                    ->required(),
+                //alamat
+                Forms\Components\TextInput::make('alamat')
+                    ->label('Alamat')
+                    ->placeholder('Alamat')
+                    ->required(),
+                Forms\Components\DatePicker::make('tgl_lahir')
+                    ->label('Tanggal Lahir')
+                    ->format('Y-m-d')
+                    ->required()
+                    ->rules(['date']),
             ]);
     }
 
@@ -31,7 +45,9 @@ class ProfileResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('nama')->searchable(),
+                Tables\Columns\TextColumn::make('alamat'),
+                Tables\Columns\TextColumn::make('tgl_lahir'),
             ])
             ->filters([
                 //
